@@ -1,17 +1,45 @@
 # dev-echo-server
 
-Echo server for development purposes only
+Simple echo server for development purposes.
+
+Mainly developed to help with the testing of:
+- [prxi](https://github.com/FireBlinkLTD/prxi) - zero runtime dependency HTTP, HTTP/2 proxy library
+- [prxi-openid-connect](https://github.com/FireBlinkLTD/prxi-openid-connect) - OpenID Connect reverse proxy for HTTP, HTTP/2 connections
+
+Supports:
+- HTTP
+- HTTPS
+- HTTP/2 h2c
+- HTTP/2
+- WS
+- WSS
+  
+## Usage
+
+```bash
+npm i -g dev-echo-server
+
+# generate certificate and key
+openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -keyout key.pem -out cert.pem
+
+export PATH_CERT=cert.pem
+export PATH_KEY=key.pem
+
+dev-echo-server
+```
 
 ## Ports
 
-| Port | Protocol |
-|---|---|
-| 7001 | HTTP |
-| 7002 | HTTPS |
-| 7003 | HTTP/2 h2c |
-| 7004 | HTTP/2 |
+| Port | Protocol   | Environment Variable |
+|------|------------|----------------------|
+| 7001 | HTTP       | `PORT_HTTP`          | 
+| 7002 | HTTPS      | `PORT_HTTPS`         |
+| 7003 | HTTP/2 h2c | `PORT_HTTP2_H2C`     |
+| 7004 | HTTP/2     | `PORT_HTTP2`         |
 
-## CURL Scripts
+## Invocation examples
+
+### CURL Scripts
 
 ```bash
 # HTTP
@@ -28,17 +56,24 @@ curl --http2-prior-knowledge http://localhost:7003/\?a\=b
 curl --http2 https://localhost:7004/\?a\=b -k
 ```
 
-## socket.io cli
+### Socket.IO CLI
 
 ```bash
+npm i -g socket.io-cli
+
+# expose env to trust self-signed certificate
+export NODE_EXTRA_CA_CERTS=cert.pem 
+
 # HTTP
-npm run-script socketio -- http://localhost:7001 
+socketio http://localhost:7001 
 
 # HTTPS
-npm run-script socketio -- https://localhost:7002
+socketio https://localhost:7002
 
 # HTTP/2 h2c - NOT SUPPORTED
 
 # HTTP/2
-npm run-script socketio -- https://localhost:7004
+socketio https://localhost:7004
+
+# Once connected just type <event> [args] and hit enter
 ```

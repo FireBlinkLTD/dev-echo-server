@@ -1,0 +1,35 @@
+name: Publish NPM Package
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm install
+      - name: Extract git tag name
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Update package.json version based on a tag
+        run: |
+          node -e " \
+            const package =JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            package.version = '$RELEASE_VERSION'; \
+            fs.writeFileSync('package.json', JSON.stringify(package)); \
+          "
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

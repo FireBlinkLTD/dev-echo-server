@@ -1,19 +1,43 @@
 {
   "name": "dev-echo-server",
-  "version": "1.0.0",
-  "description": "Echo server for development purposes only",
-  "main": "index.js",
+  "version": "0.1.0",
+  "description": "Echo server. For development purposes only.",
+  "main": "src/createServer.js",
+  "bin": {
+    "dev-echo-server": "bin/dev-echo-server.js"
+  },
+  "keywords": [
+    "fireblink",
+    "echo",
+    "server",
+    "development",
+    "http",
+    "http2",
+    "http/2",
+    "ws",
+    "websocket"    
+  ],
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node bin/dev-echo-server.js",
     "socketio": "export NODE_EXTRA_CA_CERTS=cert.pem && socketio",
     "keygen": "openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -keyout key.pem -out cert.pem"
   },
-  "author": "",
+  "author": "FireBlink LTD",
   "license": "MIT",
   "devDependencies": {
     "socket.io-cli": "^0.2.0"
   },
   "dependencies": {
     "socket.io": "^4.7.2"
+  },
+  "contributors": [
+    {
+      "name": "Vladyslav Tkachenko",
+      "email": "vlad@fireblink.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FireBlinkLTD/dev-echo-server.git"
   }
 }

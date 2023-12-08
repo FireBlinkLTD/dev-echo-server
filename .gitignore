@@ -1,11 +1,16 @@
 *
 
 !/.gitignore
+!/.npmignore
+
+!/.github
+!/.github/**
+
+!/bin
+!/bin/**
 
 !/src
 !/src/**
-
-!/*.pem
 
 !/package.json
 !/package-lock.json
