@@ -54,6 +54,13 @@ class BaseHttpServer extends BaseServer {
         headers: req.headers,
       };
 
+      if (req.headers['x-add-headers']) {
+        const headers = JSON.parse(req.headers['x-add-headers']);
+        for (const key in headers) {
+          res.setHeader(key, headers[key]);
+        }
+      }
+
       console.log('[HTTP] response', response);
       res.write(JSON.stringify(response), () => {
         res.end();

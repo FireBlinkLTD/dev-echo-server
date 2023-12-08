@@ -25,10 +25,16 @@ class BaseHttp2Server extends BaseHttpServer {
         headers: headers,
       };
 
+      let headersToAdd = {};
+      if (headers['x-add-headers']) {
+        headersToAdd = JSON.parse(headers['x-add-headers']);        
+      }
+
       console.log('[HTTP/2] respond', response);
       stream.respond({
         'content-type': 'application/json',
         [constants.HTTP2_HEADER_STATUS]: 200,
+        ...headersToAdd,
       });
       stream.write(JSON.stringify(response));
       stream.end();

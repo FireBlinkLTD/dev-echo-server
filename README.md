@@ -37,6 +37,19 @@ dev-echo-server
 | 7003 | HTTP/2 h2c | `PORT_HTTP2_H2C`     |
 | 7004 | HTTP/2     | `PORT_HTTP2`         |
 
+
+## Headers
+
+### X-Add-Headers
+
+`x-add-headers` Header can be used to add additional headers to the response. Value should be a JSON object.
+
+**Example:**
+```bash
+curl http://localhost:7001 \
+  -H 'x-add-headers: {"test": "test"}'
+```
+
 ## Invocation examples
 
 ### CURL Scripts
