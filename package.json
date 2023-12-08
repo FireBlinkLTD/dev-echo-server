@@ -1,0 +1,19 @@
+{
+  "name": "dev-echo-server",
+  "version": "1.0.0",
+  "description": "Echo server for development purposes only",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "socketio": "export NODE_EXTRA_CA_CERTS=cert.pem && socketio",
+    "keygen": "openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -keyout key.pem -out cert.pem"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "socket.io-cli": "^0.2.0"
+  },
+  "dependencies": {
+    "socket.io": "^4.7.2"
+  }
+}

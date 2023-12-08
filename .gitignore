@@ -1,0 +1,13 @@
+*
+
+!/.gitignore
+
+!/src
+!/src/**
+
+!/*.pem
+
+!/package.json
+!/package-lock.json
+
+!/README.md
