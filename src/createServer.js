@@ -21,8 +21,7 @@ const createServer = async () => {
   ];
 
   for (const server of servers) {
-    await server.init();
-    await server.postInit();
+    await server.init(); 
   }
 }
 

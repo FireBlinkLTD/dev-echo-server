@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "start": "node bin/dev-echo-server.js",
-    "socketio": "export NODE_EXTRA_CA_CERTS=cert.pem && socketio",
+    "sio": "export NODE_EXTRA_CA_CERTS=cert.pem && socketio",
     "keygen": "openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -keyout key.pem -out cert.pem"
   },
   "author": "FireBlink LTD",

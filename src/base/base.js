@@ -9,7 +9,8 @@ class BaseServer {
     this.cert = cert;
     this.port = port;
   }
-  async postInit() {}
+  
+  onInit() {}
   async init() {}
 }
 

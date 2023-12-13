@@ -7,6 +7,8 @@ class HttpServer extends BaseHttpServer {
       this.requestHandler(req, res);
     });
 
+    this.onInit();
+    
     await new Promise(res => {
       this.server.listen(this.port, () => {
         console.log('[HTTP] Server started on port', this.port);

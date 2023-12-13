@@ -18,6 +18,9 @@ class Http2Server extends BaseHttp2Server {
       this.streamHandler(stream, headers);
     });
 
+
+    this.onInit();
+
     await new Promise(res => {
       this.server.listen(this.port, () => {
         console.log('[HTTP/2] Server started on port', this.port);

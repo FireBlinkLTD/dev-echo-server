@@ -4,7 +4,7 @@ const { Server } = require('socket.io');
 class BaseHttpServer extends BaseServer {
   io;
 
-  async postInit() {
+  onInit() {
     this.io = new Server(this.server);
 
     this.io.on('connection', (socket) => {

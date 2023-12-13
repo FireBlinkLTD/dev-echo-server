@@ -16,6 +16,8 @@ class Http2cServer extends BaseHttp2Server {
       this.streamHandler(stream, headers);
     });
 
+    this.onInit();
+
     await new Promise(res => {
       this.server.listen(this.port, () => {
         console.log('[HTTP/2 Cleartext] Server started on port', this.port);
